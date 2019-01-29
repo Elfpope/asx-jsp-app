@@ -1,0 +1,20 @@
+.mvn/wrapper/
+bin/
+/target/
+mvnw*
+!.mvn/wrapper/maven-wrapper.jar
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### Eclipse ###
+local.properties
+.settings/
+.project
+.classpath
