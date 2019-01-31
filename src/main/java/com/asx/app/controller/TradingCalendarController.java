@@ -18,6 +18,11 @@ import com.asx.app.model.TradingCalendarDto;
 import com.asx.app.service.TradingCalendarService;
 import com.asx.app.util.Constants;
 
+/**
+ * It handles all requests to the application.
+ * 
+ * @author junfeng
+ */
 @Controller
 public class TradingCalendarController {
 
@@ -26,12 +31,28 @@ public class TradingCalendarController {
 	@Autowired
 	private TradingCalendarService tradingCalendarService;
 
+	/**
+	 * Serve request to the home page and initialize the associated backing bean.
+	 * 
+	 * @return home page
+	 */
 	@GetMapping({ "/", "index" })
 	public ModelAndView showHome() {
 		LOG.debug("Served a request to home page.");
 		return new ModelAndView("index", "tradingCalendarDto", new TradingCalendarDto());
 	}
 
+	/**
+	 * Serve request to add a trading date and validate the input before summiting the form.
+	 * 
+	 * @param tradingCalendarDto
+	 *            the associated backing bean
+	 * @param result
+	 *            validation result
+	 * @param model
+	 *            the model attribute map to share between request
+	 * @return success page if validation passes; otherwise home page displaying error message
+	 */
 	@PostMapping("/addTradingDate")
 	public String submit(@ModelAttribute("tradingCalendarDto") TradingCalendarDto tradingCalendarDto,
 			BindingResult result, ModelMap model) {

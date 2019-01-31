@@ -18,6 +18,11 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import com.asx.app.util.Constants;
 
+/**
+ * Model object to map the database table "Trading_Calendar"
+ * 
+ * @author junfeng
+ */
 @Entity
 @Table(name = "Trading_Calendar")
 public class TradingCalendar {

@@ -7,6 +7,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
+/**
+ * It is responsible for starting up the application.
+ * 
+ * @author junfeng
+ */
 @SpringBootApplication
 public class AsxJspAppApplication extends SpringBootServletInitializer {
 

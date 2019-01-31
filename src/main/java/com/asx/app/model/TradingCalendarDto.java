@@ -11,6 +11,11 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import com.asx.app.util.Constants;
 
+/**
+ * DTO object is used in the front-end for validation and serialization purpose.
+ * 
+ * @author junfeng
+ */
 public class TradingCalendarDto implements Serializable {
 
 	@NotNull

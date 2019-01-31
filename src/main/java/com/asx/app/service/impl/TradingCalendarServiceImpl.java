@@ -20,6 +20,11 @@ import com.asx.app.service.TradingCalendarService;
 import com.asx.app.util.Constants;
 import com.asx.app.util.DateUtils;
 
+/**
+ * It is an implementation of {@link TradingCalendarService};
+ * 
+ * @author junfeng
+ */
 @Service
 public class TradingCalendarServiceImpl implements TradingCalendarService {
 
@@ -36,11 +41,17 @@ public class TradingCalendarServiceImpl implements TradingCalendarService {
 		this.tradingCalendarRepo = tradingCalendarRepo;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public boolean recordDateCheck(Date recordDate) {
 		return isBusinessDay(recordDate) && isTradingDate(recordDate);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public boolean paymentDateCheck(Date recordDate, Date paymentDate) {
 		LocalDate recordLocalDate = DateUtils.toLocalDate(recordDate);
@@ -54,6 +65,9 @@ public class TradingCalendarServiceImpl implements TradingCalendarService {
 				&& ChronoUnit.DAYS.between(recordLocalDate, paymentLocalDate) >= Constants.DAYS_TO_PAY;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void handleSubmission(TradingCalendarDto tradingCalendarDto) {
 		if (tradingCalendarDto != null) {
@@ -69,6 +83,13 @@ public class TradingCalendarServiceImpl implements TradingCalendarService {
 		LOG.debug("Abort saving a TradingCalendar as inputing a null object.");
 	}
 
+	/**
+	 * Check if the given {@link Date} is a trading date.
+	 * 
+	 * @param date
+	 *            to check
+	 * @return {@code true} if the given {@link Date} is a trading date; otherwise {@code false}
+	 */
 	private boolean isTradingDate(Date date) {
 		if (date == null) {
 			return false;
@@ -79,6 +100,13 @@ public class TradingCalendarServiceImpl implements TradingCalendarService {
 				|| (tradingDates.size() == 1 && Constants.IS_TRADING_DATE.equals(tradingDates.get(0).getTradingDate()));
 	}
 
+	/**
+	 * Check if the given {@link Date} is a business date.
+	 * 
+	 * @param date
+	 *            to check
+	 * @return {@code true} if the given {@link Date} is a business date; otherwise {@code false}
+	 */
 	private boolean isBusinessDay(Date date) {
 		LocalDate localDate = DateUtils.toLocalDate(date);
 		if (localDate == null) {
