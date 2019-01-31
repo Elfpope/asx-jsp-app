@@ -14,7 +14,7 @@ public class AsxJspAppApplication extends SpringBootServletInitializer {
 
 	public static void main(String[] args) {
 		SpringApplication.run(AsxJspAppApplication.class, args);
-		LOG.debug("****** ASX JSP APP STARTED ******");
+		LOG.debug("************************ ASX JSP APP STARTED ************************");
 	}
 
 	/**

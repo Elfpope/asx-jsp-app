@@ -28,6 +28,14 @@ public class TradingCalendarServiceImpl implements TradingCalendarService {
 	@Autowired
 	private TradingCalendarRepository tradingCalendarRepo;
 
+	/**
+	 * @param tradingCalendarRepo
+	 *            the tradingCalendarRepo to set
+	 */
+	public void setTradingCalendarRepo(TradingCalendarRepository tradingCalendarRepo) {
+		this.tradingCalendarRepo = tradingCalendarRepo;
+	}
+
 	@Override
 	public boolean recordDateCheck(Date recordDate) {
 		return isBusinessDay(recordDate) && isTradingDate(recordDate);
@@ -55,9 +63,10 @@ public class TradingCalendarServiceImpl implements TradingCalendarService {
 
 			tradingCalendarRepo.save(tradingCalendar);
 			LOG.debug("Saved a TradingCalendar {}.", tradingCalendar);
-		} else {
-			LOG.debug("Abort saving a TradingCalendar as inputing a null object.");
+			return;
 		}
+
+		LOG.debug("Abort saving a TradingCalendar as inputing a null object.");
 	}
 
 	private boolean isTradingDate(Date date) {

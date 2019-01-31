@@ -28,31 +28,44 @@ public class TradingCalendarController {
 
 	@GetMapping({ "/", "index" })
 	public ModelAndView showHome() {
+		LOG.debug("Served a request to home page.");
 		return new ModelAndView("index", "tradingCalendarDto", new TradingCalendarDto());
 	}
 
 	@PostMapping("/addTradingDate")
 	public String submit(@ModelAttribute("tradingCalendarDto") TradingCalendarDto tradingCalendarDto,
 			BindingResult result, ModelMap model) {
+		String message = "Serving a request to addTradingDate page ...";
+		LOG.debug(message);
 
 		Date recordDate = tradingCalendarDto.getRecordDate();
 		if (!tradingCalendarService.recordDateCheck(recordDate)) {
-			result.rejectValue("recordDate", "invalid-record-date", "Record date must be a Business Date.");
+			message = "Record date must be a Business Date";
+			result.rejectValue("recordDate", "invalid-record-date", message);
+
+			LOG.debug("Aborted summitting a new trading date as the invalid record date with details [{}].", message);
 			return "index";
 		}
 
 		Date paymentDate = tradingCalendarDto.getPaymentDate();
 		if (!tradingCalendarService.paymentDateCheck(recordDate, paymentDate)) {
-			result.rejectValue("paymentDate", "invalid-payment-date",
-					"Payment date must be at least one day after the Record Date.");
+			message = "Payment date must be at least one day after the Record Date";
+			result.rejectValue("paymentDate", "invalid-payment-date", message);
+
+			LOG.debug("Aborted summitting a new trading date as the invalid payment date with details [{}].", message);
 			return "index";
 		}
 
 		SimpleDateFormat formatter = new SimpleDateFormat(Constants.DATE_PATTERN);
-		model.addAttribute("recordDate", formatter.format(tradingCalendarDto.getRecordDate()));
-		model.addAttribute("paymentDate", formatter.format(tradingCalendarDto.getPaymentDate()));
+		String recordDateStr = formatter.format(tradingCalendarDto.getRecordDate());
+		String paymentDateStr = formatter.format(tradingCalendarDto.getPaymentDate());
+
+		model.addAttribute("recordDate", recordDateStr);
+		model.addAttribute("paymentDate", paymentDateStr);
 
 		tradingCalendarService.handleSubmission(tradingCalendarDto);
+		LOG.debug("Served a request to create a trading date [{}].", recordDateStr);
+
 		return "success";
 	}
 

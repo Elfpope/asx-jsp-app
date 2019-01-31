@@ -5,13 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Home</title>
-<style>
-.error {
-	color: #ff0000;
-	font-style: italic;
-	font-weight: bold;
-}
-</style>
+<link rel="stylesheet" href="/css/main.css" />
 </head>
 <body>
 

@@ -1,0 +1,7 @@
+@charset "UTF-8";
+
+.error {
+	color: #ff0000;
+	font-style: italic;
+	font-weight: bold;
+}
